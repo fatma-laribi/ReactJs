@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <style>
+        .note{
+            width: 250px;
+            height:150px;
+            background-color: aquamarine;
+            padding:15px;
+            border: 1px solid aqua;
+            box-shadow: 2px 6px 12px rgba(0,0,0,2);
+            display: flex;
+            justify-content:flex-end;
+        }
+    </style>
+</head>
+<body>
+    <div id="react-container">
+    </div>
+    <script type="text/babel">
+        class Note extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    editing:false,
+                    isEdited:false,
+                    isDeleted:false
+                }
+                this.val=null;
+            }
+            edit=()=>this.setState({editing:true,isEdited:false})
+            save=()=>{
+                var val= this.refs.newText.value;
+                this.val=val;
+                this.setState({editing:false,isEdited:true})
+                }
+            delete=()=>this.setState({editing:this.state.editing, isEdited:this.state.isEdited, isDeleted:true})
+            renderDisplay=(msg)=>{ 
+                                return( <div className="note">
+                                <p>{msg}</p>
+                                <span>
+                                <button onClick={this.edit}>EDIT</button>    
+                                <button onClick={this.delete}>X</button>
+                                </span>
+                            </div>)
+                    }
+            renderForm=()=>{
+                return(
+                    <div className="note">
+                    <textarea ref="newText">
+                    </textarea>
+                    <button onClick={this.save}> Save </button>
+                    </div>
+                )
+            }
+            renderEmpty=()=> {
+                return(
+                    <div>No note yet
+                    <button onClick={this.newNote}>Create Note</button>    
+                    </div>
+                )
+            }
+            newNote=()=>{this.setState({editing:false, isEdited:false,isDeleted:false});}
+            render(){
+                if(this.state.isDeleted){
+                   return this.renderEmpty();
+                }
+                else{
+                var msg;
+                if(!this.state.isEdited)
+                    {msg=this.props.children;
+                    }
+                else {msg=this.val;}
+                if(this.state.editing)
+                    return this.renderForm();
+                else return this.renderDisplay(msg);
+            }}
+        }
+        ReactDOM.render(<Note>Hello World</Note>
+        ,document.getElementById('react-container'))
+        //important: don't forget div to surround the component tags
+    </script>
+    
+</body>
+</html>

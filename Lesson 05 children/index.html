@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <div id="react-container">
+    </div>
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            render(){ return <div>
+                                <h1>Hello world</h1>
+                                <p>Welcome to first react component</p>
+                                <p> {this.props.text} </p>
+                                <p>this is {this.props.children}</p>
+                            </div>}
+        }
+        ReactDOM.render(<div>
+            <MyComponent text="Bye world!">Message one</MyComponent>
+            <MyComponent text="Hello world!">Message two</MyComponent>
+            <MyComponent text="Welcome world!">Message three</MyComponent></div>
+        ,document.getElementById('react-container'))
+        //important: don't forget div to surround the component tags
+    </script>
+    
+</body>
+</html>

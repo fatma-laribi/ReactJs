@@ -1,0 +1,25 @@
+Install react globally
+cmd:
+npm install -g create-react-app
+To create an app:
+cd desktop
+mkdir ReactApp
+cd ReactApp
+create-react-app myapp
+cd myapp
+npm start
+
+To add draggable:
+inside myapp
+npm install react-draggable
+importih w les balises iwalliw just <Draggable>
+baddel App to Board 
+emchi l index.js w baddel l App b Board zeda w document.getElementById('react-container')
+public->index.html baddel root b react-container
+add css to App.css
+npm start
+
+he recommends:
+react native
+flux
+redux
